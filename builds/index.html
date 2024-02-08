@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <title>Demo Dynamic Tailwind</title>
     <style id="tailwind"></style>
-    <script src="./cdn.min.js"></script>
+    <script src="./cdn.js"></script>
 </head>
 <body>
 
@@ -38,17 +38,17 @@
                 return
             }
 
-            // await import('./cdn.min.js')
+            await import('./cdn.js')
 
             const content = Array.from(contentElements).reduce((carry, el) => carry + el.outerHTML, '')
-            console.log(window.createTailwindcssContext({}).getClassList());
-            // const css = await window.jitBrowserTailwindcss(`
-            //     @tailwind components;
-            //     @tailwind utilities;
-            // `, content)
 
-            // const style = document.getElementById('tailwind');
-            // style.textContent = css;
+            const css = await window.jitBrowserTailwindcss(`
+                @tailwind components;
+                @tailwind utilities;
+            `, content)
+
+            const style = document.getElementById('tailwind');
+            style.textContent = css;
         }
 
         init()
